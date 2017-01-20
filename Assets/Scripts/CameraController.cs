@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Test1 : MonoBehaviour {
-
+public class CameraController : MonoBehaviour {
+	public float hSpeed;
 	// Use this for initialization
 	void Start () {
 		
@@ -11,6 +11,6 @@ public class Test1 : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		transform.position = new Vector3 (transform.position.x + hSpeed * Time.deltaTime, transform.position.y, transform.position.z);
 	}
 }
