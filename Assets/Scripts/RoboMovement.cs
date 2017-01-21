@@ -5,7 +5,11 @@ using UnityEngine;
 public class RoboMovement : MonoBehaviour {
 	public static int x = 0;
 	public static Vector3[] vettore;
-	public float offset = 131.7f;
+	public float offset = 1f;
+	public ArrayList list = new ArrayList ();
+	public bool moving;
+	public float speed;
+	public WaveController waveController;
 	// Use this for initialization
 	void Start () {
 		
@@ -13,23 +17,40 @@ public class RoboMovement : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (WaivePaint.i > 300){
-			transform.position = new Vector3 (vettore [x].x, vettore [x].y - offset, vettore [x].z);
+//		if (WaivePaint.i > 300){
+		if (moving) {
+			float angle = Mathf.Atan2 (vettore [x].y - transform.position.y - offset, vettore [x].z - transform.position.z)*180/Mathf.PI;
 
-			//transform.LookAt (new Vector3(vettore [x].x, vettore [x].y - offset , vettore [x].z));
-			
-			WaivePaint.i++;
-			x++;
+			Vector3 direction =Vector3.Normalize( vettore [x] - transform.position);
+//			transform.RotateAround(transform.position,Vector3.right, angle);
+//			transform.position = new Vector3 (vettore [x].x, vettore [x].y - offset, vettore [x].z);
+
+//			transform.LookAt (new Vector3(vettore [x].x, vettore [x].y /*- offset */, 0));
+//			transform.forward = Vector3.Normalize(new Vector3(vettore [x].x-transform.position.x, vettore [x].y-transform.position.y /*- offset */, vettore[x].z-transform.position.z));
+//			transform.position = new Vector3( transform.position.x, vettore [x].y, transform.position.z);
+//			transform.Translate (direction*speed*Time.deltaTime);
+			transform.position+=direction*speed*Time.deltaTime;
+			transform.rotation = Quaternion.Euler (new Vector3(-angle, 0, 0));
+
+			if(vettore[x].z <= transform.position.z)
+				x++;
+			//			WaivePaint.i++;
+			if (x >= vettore.Length) {
+				moving = false;
+				waveController.ready = true;
+			}
+		}
 
 
-
-	}
+//	}
 
 
 
 }
-	public static void startMovement(){
-		vettore = WaivePaint.list.ToArray(typeof(Vector3)) as Vector3[];
-
+	public void startMovement(){
+		print ("start Robot movement");
+		vettore = list.ToArray(typeof(Vector3)) as Vector3[];
+		print ("vettore length:" + vettore.Length);
+		moving = true;
 	}
 }

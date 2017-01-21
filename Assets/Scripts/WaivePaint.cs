@@ -35,7 +35,7 @@ public class WaivePaint : MonoBehaviour {
 			list.Add (transform.position);
 			i++;
 		} else if (i == 300) {
-			RoboMovement.startMovement ();
+//			RoboMovement.startMovement ();
 			i++;
 		}
 
