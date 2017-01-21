@@ -34,6 +34,7 @@ public class WaveController : MonoBehaviour {
 		if (ready && !moving) {
 			if (Input.GetKey (KeyCode.Space)) {
 				moving = true;
+				print ("invoke movePlayer");
 				Invoke ("movePlayer", 1f);
 			}
 		}
@@ -99,6 +100,7 @@ public class WaveController : MonoBehaviour {
 		for (int i = 0; i < vettore.Length; i++) {
 			GameObject.Destroy (vettore [i].gameObject);
 		}
+		moving = false;
 		playerController.list.Clear ();
 		player.transform.position = transform.position;
 		gameManager.waveHit (playerId);
@@ -111,7 +113,7 @@ public class WaveController : MonoBehaviour {
 	void ResetTrails(){
 		trailRenderer.time = 30;
 	}
-	void stopWave(){
+	public void stopWave(){
 		moving = false;
 		ready = false;
 		deltaY = 0;
