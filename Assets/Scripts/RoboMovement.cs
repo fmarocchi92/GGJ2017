@@ -73,9 +73,9 @@ public class RoboMovement : MonoBehaviour {
 			break;
 		default:
 			waveController.hitSequence ();
+			moving = false;
 			list =  new ArrayList ();
 			break;
 		}
 	}
-
 }
