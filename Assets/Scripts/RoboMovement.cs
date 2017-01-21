@@ -20,9 +20,9 @@ public class RoboMovement : MonoBehaviour {
 	void Update () {
 //		if (WaivePaint.i > 300){
 		if (moving) {
-			float angle = Mathf.Atan2 (vettore [x].y - transform.position.y - offset, vettore [x].z - transform.position.z)*180/Mathf.PI;
+			float angle = Mathf.Atan2 (vettore [x + 1].y - vettore[x].y - offset, vettore [x + 1].z - vettore[x].z)*180/Mathf.PI;
 
-			 direction =Vector3.Normalize( vettore [x] - transform.position);
+			direction =Vector3.Normalize( vettore [x + 1] - vettore[x]);
 //			transform.RotateAround(transform.position,Vector3.right, angle);
 //			transform.position = new Vector3 (vettore [x].x, vettore [x].y - offset, vettore [x].z);
 
@@ -33,7 +33,7 @@ public class RoboMovement : MonoBehaviour {
 			transform.position+=direction*speed*Time.deltaTime;
 			transform.rotation = Quaternion.Euler (new Vector3(-angle, 0, 0));
 
-			if(vettore[x].z <= transform.position.z)
+			if(vettore[x + 1].z <= vettore[x ].z)
 				x++;
 			//			WaivePaint.i++;
 			if (x >= vettore.Length) {
