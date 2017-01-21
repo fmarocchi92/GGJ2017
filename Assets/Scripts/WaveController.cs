@@ -98,11 +98,11 @@ public class WaveController : MonoBehaviour {
 		trailRenderer.time = -1;
 		transform.position = player.transform.position;
 		Invoke("ResetTrails", 0.03f);
-		foreach(Vector3 c in playerController.list){
-//			GameObject.Destroy (c.gameObject);
-		}
+		Transform[] vettore = playerController.list.ToArray(typeof(Transform)) as Transform[];
+		for (int i = 0; i < vettore.Length; i++) {
 		playerController.list.Clear ();
-
+			GameObject.Destroy (vettore [i].gameObject);
+		}
 	}
 
 	void ResetTrails(){
