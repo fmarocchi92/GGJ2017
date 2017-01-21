@@ -34,8 +34,7 @@ public class WaveController : MonoBehaviour {
 		if (ready && !moving) {
 			if (Input.GetKey (KeyCode.Space)) {
 				moving = true;
-				Invoke ("movePlayer", 2f);
-			
+				Invoke ("movePlayer", 1f);
 			}
 		}
 		if (moving) {
@@ -87,13 +86,12 @@ public class WaveController : MonoBehaviour {
 			break;
 		default:
 			stopWave ();
-			gameManager.waveHit (playerId);
-			hitSequence();
+
 			break;
 		}
 	}
 
-	void hitSequence(){
+	public void hitSequence(){
 		print ("hit animation, maybe here i need to wait for the animation to end or just a timer before teleporting");
 		trailRenderer.time = -1;
 		transform.position = lastCheckPoint.transform.position;
@@ -103,6 +101,12 @@ public class WaveController : MonoBehaviour {
 			GameObject.Destroy (vettore [i].gameObject);
 		}
 		playerController.list.Clear ();
+		player.transform.position = transform.position;
+		gameManager.waveHit (playerId);
+	}
+
+	void teleport(){
+
 	}
 
 	void ResetTrails(){
@@ -110,14 +114,15 @@ public class WaveController : MonoBehaviour {
 	}
 	void stopWave(){
 		moving = false;
-		ready = true;
-		deltaY = 0;
-	}
-/*	void movePlayer(){
-		cameraController.followPlayer ();
-		moving = true;
 		ready = false;
 		deltaY = 0;
+	}
+	void movePlayer(){
+//		cameraController.followPlayer ();
+//		moving = true;
+//		ready = false;
+//		deltaY = 0;
+		playerController.startMovement ();
 
-	} */
+	} 
 }
