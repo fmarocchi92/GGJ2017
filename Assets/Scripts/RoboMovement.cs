@@ -47,13 +47,18 @@ public class RoboMovement : MonoBehaviour {
 				waveController.ready = true;
 				waveController.hitSequence ();
 			}
+
+			if (transform.position.z >= waveController.target.position.z) {
+				print ("you win");
+
+			}
 		}
 
 }
 	public void startMovement(){
 		print ("start Robot movement");
 //		vettore = list.ToArray(typeof(Transform)) as Transform[];
-		print ("vettore length:" + vettore.Length);
+//		print ("vettore length:" + vettore.Length);
 		moving = true;
 		x = 0;
 	}
@@ -69,9 +74,10 @@ public class RoboMovement : MonoBehaviour {
 			print ("hitting checkpoint");
 			break;
 		case "goal":
-
+			print ("win");
 			break;
 		default:
+			print ("hit obstacle");
 			waveController.hitSequence ();
 			moving = false;
 			list =  new ArrayList ();

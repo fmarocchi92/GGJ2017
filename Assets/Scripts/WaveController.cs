@@ -63,10 +63,7 @@ public class WaveController : MonoBehaviour {
 			newPaint.transform.position = transform.position;
 			playerController.list.Add (newPaint.transform);
 
-			if (transform.position.z >= target.position.z) {
-				print ("wave reached goal");
-			
-			}
+
 		}
 	}
 
@@ -94,13 +91,13 @@ public class WaveController : MonoBehaviour {
 	public void hitSequence(){
 		print ("hit animation, maybe here i need to wait for the animation to end or just a timer before teleporting");
 		trailRenderer.time = -1;
-		transform.position = lastCheckPoint.transform.position;
+		transform.position = playerController.lastCheckPoint.transform.position;
 		Invoke("ResetTrails", 0.03f);
 		Transform[] vettore = playerController.list.ToArray(typeof(Transform)) as Transform[];
 		for (int i = 0; i < vettore.Length; i++) {
 			GameObject.Destroy (vettore [i].gameObject);
 		}
-		moving = false;
+		stopWave ();
 		playerController.list.Clear ();
 		player.transform.position = transform.position;
 		gameManager.waveHit (playerId);
@@ -115,7 +112,7 @@ public class WaveController : MonoBehaviour {
 	}
 	public void stopWave(){
 		moving = false;
-		ready = false;
+		ready = true;
 		deltaY = 0;
 	}
 	void movePlayer(){
