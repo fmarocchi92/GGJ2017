@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour {
 	public void waveHit(int playerIndex){
 		print ("playerHit");
 		GameObject newSpotlight = Light.Instantiate (spotLights[playerIndex]);
-		newSpotlight.transform.position = new Vector3(waveHeads[playerIndex].transform.position.x, waveHeads[playerIndex].transform.position.y,-5);
+		newSpotlight.transform.position = new Vector3(players[playerIndex].transform.position.x +5, players[playerIndex].transform.position.y,players[playerIndex].transform.position.z);
+		newSpotlight.transform.rotation = Quaternion.Euler (0, -90, 0);
 	}
 }
