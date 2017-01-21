@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WavePaint : MonoBehaviour {
+public class WaveController : MonoBehaviour {
 	public float hSpeed;
 	public float vSpeed;
 	private float deltaY = 0;
 	public float pitchRange = 12;
+	public int player;
 	private AudioSource audioSource;
+	private GameObject lastCheckPoint;
+	public GameManager gameManager;
+	public GameObject[] fragments;
+
 	// Use this for initialization
 	void Start () {
 		audioSource = GetComponent<AudioSource> ();
@@ -31,5 +36,17 @@ public class WavePaint : MonoBehaviour {
 		tempPitch=Mathf.Clamp01 (tempPitch+0.5f);
 
 		audioSource.pitch = tempPitch==0?0.1f:(tempPitch * 3);
+	}
+
+	void OnCollisionEnter (Collision collision){
+		print ("collision");
+		if(collision.gameObject.layer ==LayerMask.NameToLayer("Ground")){
+			gameManager.waveHit (player);
+			hitSequence();
+		}
+	}
+
+	void hitSequence(){
+
 	}
 }
