@@ -32,7 +32,7 @@ public class WaveController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (ready && !moving) {
-			if (Input.GetKey (KeyCode.Space)) {
+			if (Input.GetButton ("Fire"+playerId)) {
 				moving = true;
 				print ("invoke movePlayer");
 				Invoke ("movePlayer", 1f);
@@ -41,7 +41,7 @@ public class WaveController : MonoBehaviour {
 		if (moving) {
 			cameraController.followWave ();
 			//INPUT
-			bool pressed = Input.GetKey (KeyCode.Space);
+			bool pressed = Input.GetButton ("Fire"+playerId);
 			//MOVEMENT CONTROL
 			if (transform.position.y + deltaY * Time.deltaTime > maxHeight || transform.position.y + deltaY * Time.deltaTime < minHeight)
 				deltaY = 0;
@@ -72,20 +72,26 @@ public class WaveController : MonoBehaviour {
 		print ("collision with: "+other.gameObject.tag +" " +other.gameObject);
 		switch (other.gameObject.tag) {
 		case "checkpoint":
-			if (other.gameObject.Equals(lastCheckPoint)) {
-				break;
-			}
-			lastCheckPoint = other.gameObject;
-			print ("hitting checkpoint");
+//			if (other.gameObject.Equals(lastCheckPoint)) {
+//				break;
+//			}
+//			lastCheckPoint = other.gameObject;
+//			print ("hitting checkpoint");
 
 			break;
 		case "goal":
 			
 			break;
 		default:
-			stopWave ();
+//			stopWave ();
+			Invoke("scream",0.5f);
 			break;
 		}
+	}
+
+	public void scream(){
+		print ("SCREAM");
+		audioSource.Play();
 	}
 
 	public void hitSequence(){
@@ -93,7 +99,7 @@ public class WaveController : MonoBehaviour {
 		trailRenderer.time = -1;
 		gameManager.waveHit (playerId);
 		transform.position = playerController.lastCheckPoint.transform.position;
-		Invoke("ResetTrails", 0.03f);
+		Invoke("ResetTrails", 0.05f);
 		Transform[] vettore = playerController.list.ToArray(typeof(Transform)) as Transform[];
 		for (int i = 0; i < vettore.Length; i++) {
 			GameObject.Destroy (vettore [i].gameObject);

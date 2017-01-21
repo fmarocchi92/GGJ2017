@@ -10,7 +10,7 @@ public class MenuController : MonoBehaviour {
 	}
 
 	public void multiPlayer(){
-		SceneManager.LoadScene ("mappalivello1");
+		SceneManager.LoadScene ("multiplayer1");
 	}
 
 	public void exit(){
