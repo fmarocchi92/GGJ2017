@@ -13,7 +13,7 @@ public class RoboMovement : MonoBehaviour {
 	public Vector3 direction;
 	// Use this for initialization
 	void Start () {
-		AAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
 	}
 
 	// Update is called once per frame
