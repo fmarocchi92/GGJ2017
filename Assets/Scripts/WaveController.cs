@@ -61,11 +61,11 @@ public class WaveController : MonoBehaviour {
 			//points instantiation
 			GameObject newPaint = GameObject.Instantiate (paint);
 			newPaint.transform.position = transform.position;
-			playerController.list.Add (transform.position);
+			playerController.list.Add (transform);
 
 			if (transform.position.z >= target.position.z) {
 				print ("wave reached goal");
-				movePlayer ();
+			
 			}
 		}
 	}
@@ -80,10 +80,10 @@ public class WaveController : MonoBehaviour {
 			}
 			lastCheckPoint = other.gameObject;
 			print ("hitting checkpoint");
-			movePlayer ();
+
 			break;
 		case "goal":
-			movePlayer ();
+			
 			break;
 		default:
 			stopWave ();
@@ -113,11 +113,11 @@ public class WaveController : MonoBehaviour {
 		ready = true;
 		deltaY = 0;
 	}
-	void movePlayer(){
+/*	void movePlayer(){
 		cameraController.followPlayer ();
 		moving = true;
 		ready = false;
 		deltaY = 0;
-		playerController.startMovement ();
-	}
+
+	} */
 }
