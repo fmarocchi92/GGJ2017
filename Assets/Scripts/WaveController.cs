@@ -32,7 +32,11 @@ public class WaveController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (ready && !moving) {
-			moving = Input.GetKey (KeyCode.Space);
+			if (Input.GetKey (KeyCode.Space)) {
+				moving = true;
+				Invoke ("movePlayer", 2f);
+			
+			}
 		}
 		if (moving) {
 			cameraController.followWave ();
@@ -57,7 +61,7 @@ public class WaveController : MonoBehaviour {
 			//points instantiation
 			GameObject newPaint = GameObject.Instantiate (paint);
 			newPaint.transform.position = transform.position;
-			playerController.list.Add (newPaint.transform);
+			playerController.list.Add (transform.position);
 
 			if (transform.position.z >= target.position.z) {
 				print ("wave reached goal");
@@ -94,12 +98,11 @@ public class WaveController : MonoBehaviour {
 		trailRenderer.time = -1;
 		transform.position = player.transform.position;
 		Invoke("ResetTrails", 0.03f);
-		Transform[] transforms = playerController.list.ToArray(typeof(Transform)) as Transform[];
-		for(int i = 0; i <transforms.Length ; i++)
-		{
-				Destroy(transforms[i].gameObject);
+		foreach(Vector3 c in playerController.list){
+//			GameObject.Destroy (c.gameObject);
 		}
 		playerController.list.Clear ();
+
 	}
 
 	void ResetTrails(){
@@ -112,7 +115,7 @@ public class WaveController : MonoBehaviour {
 	}
 	void movePlayer(){
 		cameraController.followPlayer ();
-		moving = false;
+		moving = true;
 		ready = false;
 		deltaY = 0;
 		playerController.startMovement ();
