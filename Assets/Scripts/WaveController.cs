@@ -32,7 +32,11 @@ public class WaveController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (ready && !moving) {
-			moving = Input.GetKey (KeyCode.Space);
+			if (Input.GetKey (KeyCode.Space)) {
+				moving = true;
+				Invoke ("movePlayer", 2f);
+			
+			}
 		}
 		if (moving) {
 			cameraController.followWave ();
@@ -111,7 +115,7 @@ public class WaveController : MonoBehaviour {
 	}
 	void movePlayer(){
 		cameraController.followPlayer ();
-		moving = false;
+		moving = true;
 		ready = false;
 		deltaY = 0;
 		playerController.startMovement ();
