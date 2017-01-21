@@ -20,7 +20,7 @@ public class WaveController : MonoBehaviour {
 	public Transform target;
 	public bool moving = false;
 	public bool ready = false;
-//	public ArrayList list = new ArrayList();
+	public CameraController cameraController;
 
 	// Use this for initialization
 	void Start () {
@@ -35,6 +35,7 @@ public class WaveController : MonoBehaviour {
 			moving = Input.GetKey (KeyCode.Space);
 		}
 		if (moving) {
+			cameraController.followWave ();
 			//INPUT
 			bool pressed = Input.GetKey (KeyCode.Space);
 			//MOVEMENT CONTROL
@@ -70,6 +71,9 @@ public class WaveController : MonoBehaviour {
 		print ("collision with: "+other.gameObject.tag +" " +other.gameObject);
 		switch (other.gameObject.tag) {
 		case "checkpoint":
+			if (other.gameObject.Equals(lastCheckPoint)) {
+				break;
+			}
 			lastCheckPoint = other.gameObject;
 			print ("hitting checkpoint");
 			movePlayer ();
@@ -90,6 +94,11 @@ public class WaveController : MonoBehaviour {
 		trailRenderer.time = -1;
 		transform.position = player.transform.position;
 		Invoke("ResetTrails", 0.03f);
+		foreach(Vector3 c in playerController.list){
+//			GameObject.Destroy (c.gameObject);
+		}
+		playerController.list.Clear ();
+
 	}
 
 	void ResetTrails(){
@@ -101,6 +110,7 @@ public class WaveController : MonoBehaviour {
 		deltaY = 0;
 	}
 	void movePlayer(){
+		cameraController.followPlayer ();
 		moving = false;
 		ready = false;
 		deltaY = 0;
