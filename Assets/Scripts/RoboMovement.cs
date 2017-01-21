@@ -11,6 +11,8 @@ public class RoboMovement : MonoBehaviour {
 	public float speed;
 	public WaveController waveController;
 	public Vector3 direction;
+
+	public GameObject lastCheckPoint;
 	private bool toggle;
 	// Use this for initialization
 	void Start () {
@@ -23,8 +25,6 @@ public class RoboMovement : MonoBehaviour {
 		if (moving) {
 			
 		//	float angle = Mathf.Atan2 (vettore [x + 1].y - vettore[x].y, vettore [x + 1].z - vettore[x].z)*180/Mathf.PI;
-			print(x);
-			print (list.Count);
 	//		direction =Vector3.Normalize( vettore [x + 1] - vettore[x]);
 //			transform.RotateAround(transform.position,Vector3.right, angle);
 			transform.position = new Vector3 (((Transform)list[x]).transform.position.x,((Transform)list[x]).transform.position.y - offset, ((Transform)list[x]).transform.position.z);
@@ -40,7 +40,6 @@ public class RoboMovement : MonoBehaviour {
 			if(toggle)
 				x = x +2 ;
 			toggle = !toggle;
-			print (x);
 			//WaivePaint.i++;
 			if (x >= list.Count) {
 				x = 0;
@@ -50,17 +49,33 @@ public class RoboMovement : MonoBehaviour {
 			}
 		}
 
-
-//	}
-
-
-
 }
 	public void startMovement(){
 		print ("start Robot movement");
 //		vettore = list.ToArray(typeof(Transform)) as Transform[];
 		print ("vettore length:" + vettore.Length);
 		moving = true;
+		x = 0;
+	}
+
+	void OnTriggerEnter (Collider other){
+		print ("collision with: "+other.gameObject.tag +" " +other.gameObject);
+		switch (other.gameObject.tag) {
+		case "checkpoint":
+			if (other.gameObject.Equals(lastCheckPoint)) {
+				break;
+			}
+			lastCheckPoint = other.gameObject;
+			print ("hitting checkpoint");
+			break;
+		case "goal":
+
+			break;
+		default:
+			waveController.hitSequence ();
+			list =  new ArrayList ();
+			break;
+		}
 	}
 
 }
