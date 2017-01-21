@@ -49,6 +49,7 @@
      <Compile Include="Assets\Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\DarknessController.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
+     <Compile Include="Assets\Scripts\MenuController.cs" />
      <Compile Include="Assets\Scripts\MovLuce.cs" />
      <Compile Include="Assets\Scripts\RoboMovement.cs" />
      <Compile Include="Assets\Scripts\WaivePaint.cs" />

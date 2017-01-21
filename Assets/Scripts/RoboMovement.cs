@@ -11,7 +11,7 @@ public class RoboMovement : MonoBehaviour {
 	public float speed;
 	public WaveController waveController;
 	public Vector3 direction;
-
+	public GameObject endGameMenu;
 	public GameObject lastCheckPoint;
 	private bool toggle;
 	// Use this for initialization
@@ -50,7 +50,7 @@ public class RoboMovement : MonoBehaviour {
 
 			if (transform.position.z >= waveController.target.position.z) {
 				print ("you win");
-
+				endGameMenu.SetActive(true);
 			}
 		}
 
