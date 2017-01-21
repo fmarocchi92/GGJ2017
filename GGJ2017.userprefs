@@ -1,8 +1,9 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Materials\NewBehaviourScript.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\WaivePaint.cs">
     <Files>
-      <File FileName="Assets\Materials\NewBehaviourScript.cs" Line="9" Column="3" />
+      <File FileName="Assets\Scripts\WaivePaint.cs" Line="14" Column="18" />
+      <File FileName="Assets\Shader\Stencil Mask.shader" Line="42" Column="18" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
