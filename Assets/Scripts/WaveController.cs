@@ -61,7 +61,7 @@ public class WaveController : MonoBehaviour {
 			//points instantiation
 			GameObject newPaint = GameObject.Instantiate (paint);
 			newPaint.transform.position = transform.position;
-			playerController.list.Add (transform);
+			playerController.list.Add (newPaint.transform);
 
 			if (transform.position.z >= target.position.z) {
 				print ("wave reached goal");
@@ -100,9 +100,9 @@ public class WaveController : MonoBehaviour {
 		Invoke("ResetTrails", 0.03f);
 		Transform[] vettore = playerController.list.ToArray(typeof(Transform)) as Transform[];
 		for (int i = 0; i < vettore.Length; i++) {
-		playerController.list.Clear ();
 			GameObject.Destroy (vettore [i].gameObject);
 		}
+		playerController.list.Clear ();
 	}
 
 	void ResetTrails(){

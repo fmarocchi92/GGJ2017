@@ -14,7 +14,8 @@ public class CameraController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		transform.position = new Vector3 (transform.position.x , transform.position.y, currentTarget.transform.position.z);
+		print (waveHead);
+		transform.position = new Vector3 (transform.position.x , transform.position.y, waveHead.transform.position.z);
 	}
 
 	public void followPlayer (){
