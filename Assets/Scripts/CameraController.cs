@@ -14,7 +14,6 @@ public class CameraController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		print (waveHead);
 		transform.position = new Vector3 (transform.position.x , transform.position.y, waveHead.transform.position.z);
 	}
 

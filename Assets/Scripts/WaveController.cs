@@ -96,7 +96,7 @@ public class WaveController : MonoBehaviour {
 	void hitSequence(){
 		print ("hit animation, maybe here i need to wait for the animation to end or just a timer before teleporting");
 		trailRenderer.time = -1;
-		transform.position = player.transform.position;
+		transform.position = lastCheckPoint.transform.position;
 		Invoke("ResetTrails", 0.03f);
 		Transform[] vettore = playerController.list.ToArray(typeof(Transform)) as Transform[];
 		for (int i = 0; i < vettore.Length; i++) {
