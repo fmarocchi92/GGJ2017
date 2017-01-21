@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RoboMovement : MonoBehaviour {
 	public static int x = 0;
-	public  Vector3[] vettore;
+	public  Transform[] vettore;
 	public float offset = 1f;
 	public ArrayList list = new ArrayList ();
 	public bool moving;
@@ -20,9 +20,9 @@ public class RoboMovement : MonoBehaviour {
 	void Update () {
 //		if (WaivePaint.i > 300){
 		if (moving) {
-			float angle = Mathf.Atan2 (vettore [x + 1].y - vettore[x].y - offset, vettore [x + 1].z - vettore[x].z)*180/Mathf.PI;
+			float angle = Mathf.Atan2 (vettore [x + 1].position.y - vettore[x].position.y - offset, vettore [x + 1].position.z - vettore[x].position.z)*180/Mathf.PI;
 
-			direction =Vector3.Normalize( vettore [x + 1] - vettore[x]);
+			direction =Vector3.Normalize( vettore [x + 1].position - vettore[x].position);
 //			transform.RotateAround(transform.position,Vector3.right, angle);
 //			transform.position = new Vector3 (vettore [x].x, vettore [x].y - offset, vettore [x].z);
 
@@ -33,7 +33,7 @@ public class RoboMovement : MonoBehaviour {
 			transform.position+=direction*speed*Time.deltaTime;
 			transform.rotation = Quaternion.Euler (new Vector3(-angle, 0, 0));
 
-			if(vettore[x + 1].z <= vettore[x ].z)
+			if(vettore[x + 1].position.z <= vettore[x ].position.z)
 				x++;
 			//			WaivePaint.i++;
 			if (x >= vettore.Length) {
@@ -50,7 +50,7 @@ public class RoboMovement : MonoBehaviour {
 }
 	public void startMovement(){
 		print ("start Robot movement");
-		vettore = list.ToArray(typeof(Vector3)) as Vector3[];
+		vettore = list.ToArray(typeof(Transform)) as Transform[];
 		print ("vettore length:" + vettore.Length);
 		moving = true;
 	}
