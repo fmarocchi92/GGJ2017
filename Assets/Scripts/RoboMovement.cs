@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class RoboMovement : MonoBehaviour {
 	public static int x = 0;
-	public static Vector3[] vettore;
+	public  Vector3[] vettore;
 	public float offset = 1f;
 	public ArrayList list = new ArrayList ();
 	public bool moving;
 	public float speed;
 	public WaveController waveController;
+	public Vector3 direction;
 	// Use this for initialization
 	void Start () {
 		
@@ -21,7 +22,7 @@ public class RoboMovement : MonoBehaviour {
 		if (moving) {
 			float angle = Mathf.Atan2 (vettore [x].y - transform.position.y - offset, vettore [x].z - transform.position.z)*180/Mathf.PI;
 
-			Vector3 direction =Vector3.Normalize( vettore [x] - transform.position);
+			 direction =Vector3.Normalize( vettore [x] - transform.position);
 //			transform.RotateAround(transform.position,Vector3.right, angle);
 //			transform.position = new Vector3 (vettore [x].x, vettore [x].y - offset, vettore [x].z);
 
@@ -53,4 +54,5 @@ public class RoboMovement : MonoBehaviour {
 		print ("vettore length:" + vettore.Length);
 		moving = true;
 	}
+
 }
