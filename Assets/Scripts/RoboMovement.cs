@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RoboMovement : MonoBehaviour {
 	public static int x = 0;
-	public  Vector3[] vettore;
+	public  Transform[] vettore;
 	public float offset = 1f;
 	public ArrayList list = new ArrayList ();
 	public bool moving;
@@ -24,9 +24,9 @@ public class RoboMovement : MonoBehaviour {
 
 	//		direction =Vector3.Normalize( vettore [x + 1] - vettore[x]);
 //			transform.RotateAround(transform.position,Vector3.right, angle);
-		transform.position = new Vector3 (vettore [x].x, vettore [x].y - offset, vettore [x].z);
+			transform.position = new Vector3 (vettore [x].transform.position.x, vettore [x].transform.position.y - offset, vettore [x].transform.position.z);
 
-			transform.LookAt (new Vector3(vettore [x].x, vettore [x].y /*- offset */, 0));
+			transform.LookAt (new Vector3(vettore [x].transform.position.x, vettore [x].transform.position.y /*- offset */, 0));
 //			transform.forward = Vector3.Normalize(new Vector3(vettore [x].x-transform.position.x, vettore [x].y-transform.position.y /*- offset */, vettore[x].z-transform.position.z));
 //			transform.position = new Vector3( transform.position.x, vettore [x].y, transform.position.z);
 //			transform.Translate (direction*speed*Time.deltaTime);
@@ -50,7 +50,7 @@ public class RoboMovement : MonoBehaviour {
 }
 	public void startMovement(){
 		print ("start Robot movement");
-		vettore = list.ToArray(typeof(Vector3)) as Vector3[];
+		vettore = list.ToArray(typeof(Transform)) as Transform[];
 		print ("vettore length:" + vettore.Length);
 		moving = true;
 	}
