@@ -21,7 +21,7 @@ public class WaveController : MonoBehaviour {
 	public bool moving = false;
 	public bool ready = false;
 	public CameraController cameraController;
-
+	public bool safeor = false;
 	// Use this for initialization
 	void Start () {
 		audioSource = GetComponent<AudioSource> ();
@@ -50,9 +50,13 @@ public class WaveController : MonoBehaviour {
 			} else if(!pressed && !(transform.position.y + deltaY * Time.deltaTime < minHeight)){
 				deltaY -= vSpeed;
 			}
+			if (safeor == false) {
+				transform.position = new Vector3 (transform.position.x, transform.position.y + deltaY * Time.deltaTime, transform.position.z + hSpeed * Time.deltaTime);
+			} else  {
+				transform.position = new Vector3 (transform.position.x, transform.position.y + Mathf.Abs(deltaY)* Time.deltaTime , transform.position.z + hSpeed * Time.deltaTime);
 
+			}
 
-			transform.position = new Vector3 (transform.position.x , transform.position.y + deltaY * Time.deltaTime, transform.position.z+ hSpeed * Time.deltaTime);
 			float tempPitch = transform.position.y / pitchRange;
 			tempPitch = Mathf.Clamp01 (tempPitch + 0.5f);
 
@@ -65,28 +69,20 @@ public class WaveController : MonoBehaviour {
 
 
 		}
+		safeor = false;
 	}
 
-
-	void OnTriggerEnter (Collider other){
+	void OnTriggerStay (Collider other){
 		print ("collision with: "+other.gameObject.tag +" " +other.gameObject);
-		switch (other.gameObject.tag) {
-		case "checkpoint":
-//			if (other.gameObject.Equals(lastCheckPoint)) {
-//				break;
-//			}
-//			lastCheckPoint = other.gameObject;
-//			print ("hitting checkpoint");
+		if (other.gameObject.tag == "safe") {
+			safeor = true;
+		} 
 
-			break;
-		case "goal":
-			
-			break;
-		default:
-//			stopWave ();
-			Invoke("scream",0.5f);
-			break;
-		}
+	}
+	void OnTriggerEnter (Collider other){
+		if (other.gameObject.tag == "safe") {
+			deltaY = 0;
+		} 
 	}
 
 	public void scream(){

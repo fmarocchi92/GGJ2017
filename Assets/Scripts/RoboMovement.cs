@@ -76,6 +76,9 @@ public class RoboMovement : MonoBehaviour {
 		case "goal":
 			print ("win");
 			break;
+		case "safe":
+			
+			break;
 		default:
 			print ("hit obstacle");
 			waveController.hitSequence ();
