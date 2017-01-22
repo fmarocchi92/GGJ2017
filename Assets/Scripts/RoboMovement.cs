@@ -14,9 +14,11 @@ public class RoboMovement : MonoBehaviour {
 	public GameObject endGameMenu;
 	public GameObject lastCheckPoint;
 	private bool toggle;
+	public GameObject[] robotPieces;
+	private AudioSource audioSource;
 	// Use this for initialization
 	void Start () {
-
+		audioSource = GetComponent<AudioSource> ();
 	}
 
 	// Update is called once per frame
@@ -64,7 +66,7 @@ public class RoboMovement : MonoBehaviour {
 	}
 
 	void OnTriggerEnter (Collider other){
-		print ("collision with: "+other.gameObject.tag +" " +other.gameObject);
+//		print ("collision with: "+other.gameObject.tag +" " +other.gameObject);
 		switch (other.gameObject.tag) {
 		case "checkpoint":
 			if (other.gameObject.Equals(lastCheckPoint)) {
@@ -81,10 +83,31 @@ public class RoboMovement : MonoBehaviour {
 			break;
 		default:
 			print ("hit obstacle");
-			waveController.hitSequence ();
+			breakRobot ();
 			moving = false;
 			list =  new ArrayList ();
 			break;
+			Invoke("reset",2f);
 		}
+	}
+
+
+	void breakRobot(){
+		if (audioSource.clip != null) {
+			audioSource.Play ();
+		}
+
+		for (int i = 0; i < robotPieces.Length; i++) {
+			GameObject newPiece = GameObject.Instantiate (robotPieces [i]);
+			newPiece.transform.position = transform.position;
+		}
+		GetComponentInChildren<MeshRenderer>().enabled = false;
+		Invoke ("reset", 2f);
+	}
+
+	void reset(){
+		waveController.hitSequence ();
+		audioSource.Play ();
+		GetComponentInChildren<MeshRenderer> ().enabled = true;
 	}
 }

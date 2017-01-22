@@ -54,6 +54,7 @@
      <Compile Include="Assets\Scripts\MenuController.cs" />
      <Compile Include="Assets\Scripts\MovLuce.cs" />
      <Compile Include="Assets\Scripts\RoboMovement.cs" />
+     <Compile Include="Assets\Scripts\RobotPiece.cs" />
      <Compile Include="Assets\Scripts\WaivePaint.cs" />
      <Compile Include="Assets\Scripts\WaveController.cs" />
      <None Include="Assets\Shader\Stencil Mask.shader" />

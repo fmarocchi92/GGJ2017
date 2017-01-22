@@ -73,7 +73,7 @@ public class WaveController : MonoBehaviour {
 	}
 
 	void OnTriggerStay (Collider other){
-		print ("collision with: "+other.gameObject.tag +" " +other.gameObject);
+//		print ("collision with: "+other.gameObject.tag +" " +other.gameObject);
 		if (other.gameObject.tag == "safe") {
 			safeor = true;
 		} 
